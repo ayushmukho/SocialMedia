@@ -12,8 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 
 //Importing routes
 const postRoute = require("./routes/postRoute");
+const userRoute = require("./routes/userRoute");
 
 //Using Routes
 app.use("/api/v1", postRoute);
+app.use("/api/v1", userRoute);
 
 module.exports = app;
