@@ -1,4 +1,5 @@
 const Post = require("../models/Post");
+const User = require("../models/User");
 
 exports.createPost = async (req, res) => {
   try {
@@ -11,16 +12,18 @@ exports.createPost = async (req, res) => {
       owner: req.user._id,
     };
 
-    const newPost = await Post.create(newPostData);
+    const post = await Post.create(newPostData);
+    const user = await User.findById(req.user._id);
 
     //Push into POST array of the login user --refer the Schema of user
-    
+    user.posts.push(post._id);
+
+    await user.save();
 
     res.status(201).json({
       success: true,
-      post: newPost,
+      post,
     });
-
   } catch (error) {
     res.status(500).json({
       success: false,
