@@ -221,6 +221,7 @@ exports.deleteProfile = async (req, res) => {
     const userId = user._id;
     const posts = user.posts;
     const followers = user.followers;
+    const following = user.following;
 
     await user.remove();
 
@@ -245,6 +246,16 @@ exports.deleteProfile = async (req, res) => {
       follower.following.splice(index, 1);
 
       await follower.save();
+    }
+
+    //Removing user from following's follower
+    for (let i = 0; i < following.length(); i++) {
+      const follows = await User.findById(following[i]);
+
+      const index = follows.followers.indexOf(userId);
+      follows.followers.splice(index, 1);
+
+      await follows.save();
     }
 
     res.staus(200).json({
