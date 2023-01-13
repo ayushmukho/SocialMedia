@@ -82,6 +82,24 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.logout = async (req, res) => {
+  try {
+    const options = {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+    };
+    res.status(200).cookie("token", null, options).json({
+      success: true,
+      message: "Logged out",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 exports.followOrUnfollowUser = async (req, res) => {
   try {
     const userToFollow = await User.findById(req.params.id);
@@ -110,7 +128,7 @@ exports.followOrUnfollowUser = async (req, res) => {
         message: "User Unfollowed",
       });
 
-    //Follow
+      //Follow
     } else {
       loggedInUser.following.push(userToFollow._id);
       userToFollow.followers.push(loggedInUser._id);
