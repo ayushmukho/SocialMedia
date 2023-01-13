@@ -107,3 +107,30 @@ exports.likeAndUnlikePost = async (req, res) => {
     });
   }
 };
+
+exports.getPostOfFollowing = async (req, res) => {
+  try {
+    //polulates the entire filed of following having the user._id with posts
+
+    //-- METHOD 1
+    // const user = await User.findById(req.user._id).populate("following", "posts");
+
+    //--METHOD 2
+    const user = await User.findById(req.user._id);
+    const posts = await Post.find({
+      owner: {
+        $in: user.following,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      posts, 
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
