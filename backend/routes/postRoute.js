@@ -1,10 +1,17 @@
 const express = require("express");
-const { createPost, likeAndUnlikePost } = require("../controllers/postController");
+const {
+  createPost,
+  likeAndUnlikePost,
+  deletePost,
+} = require("../controllers/postController");
 const { isAuthenticated } = require("../middlewares/auth");
 
 const router = express.Router();
 
 router.route("/post/upload").post(isAuthenticated, createPost);
-router.route("/post/:id").get(isAuthenticated, likeAndUnlikePost);
+router
+  .route("/post/:id")
+  .get(isAuthenticated, likeAndUnlikePost)
+  .delete(isAuthenticated, deletePost);
 
 module.exports = router;
