@@ -216,3 +216,59 @@ exports.addCommentOrUpdate = async (req, res) => {
     });
   }
 };
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "Post not found",
+      });
+    }
+
+    //If you are the owner u can delete any cmnt on your post
+    if (post.owner.toString() === req.user._id.toString()) {
+      
+      if (req.body.commentId == undefined) {
+        return res.status(404).json({
+          success: false,
+          message: "Comment Id is required",
+        });
+      }
+
+      post.comments.forEach((item, index) => {
+        if (item._id.toString() === req.body.commentId.toString()) {
+          return post.comments.splice(index, 1);
+        }
+      });
+
+      await post.save();
+
+      res.status(200).json({
+        success: true,
+        message: "Selected comment deleted",
+      });
+      //You are no the owner u can delete only ur cmnt
+    } else {
+      post.comments.forEach((item, index) => {
+        if (item.user.toString() === req.user._id.toString()) {
+          return post.comments.splice(index, 1);
+        }
+      });
+
+      await post.save();
+
+      res.status(200).json({
+        success: true,
+        message: "Your comment deleted",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
