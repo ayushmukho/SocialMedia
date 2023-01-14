@@ -1,0 +1,11 @@
+import axios from "axios";
+
+const API = axios.create({ baseURL: "http://localhost:4000/api/v1" });
+
+const headerOptions = {
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+
+export const login = (email, password) => API.post("/login", { email, password }, headerOptions);

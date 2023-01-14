@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./Login.css";
+import { loginUser } from "../../Redux/Actions/userActions";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,8 +13,8 @@ const Login = () => {
   //handlers
   const loginHandler = (e) => {
     e.preventDefault();
-
-    //dispatch(loginUser(email, password));
+ 
+    dispatch(loginUser(email, password));
   }
   return (
     <div className="login">
