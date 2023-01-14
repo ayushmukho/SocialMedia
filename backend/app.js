@@ -1,17 +1,22 @@
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
-const cors = require('cors');
+const cors = require("cors");
+
+const corsOptions = {
+  credentials: true,
+  origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
+};
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
 
 //Using middlewares
-app.use(cors());
+app.use(cookieParser());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 //Importing routes
 const postRoute = require("./routes/postRoute");
