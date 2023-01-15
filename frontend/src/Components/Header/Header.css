@@ -1,7 +1,17 @@
-.header {
+.header-top {
   display: flex;
   justify-content: center;
+  background-color: #f6f6f2;
+}
+.header {
+  display: flex;
+  background-color: white;
+  justify-content: center;
   align-items: center;
+  border-radius: 0px 0px 20px 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  width: 50%;
 }
 
 .header > a {
@@ -17,7 +27,7 @@
 
 .header > a > svg:hover {
   color: black;
-  transform: scale(1.2);
+  transform: scale(1);
 }
 
 @media screen and (max-width: 600px) {

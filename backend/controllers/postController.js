@@ -125,7 +125,7 @@ exports.getPostOfFollowing = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      posts,
+      posts: posts.reverse(),
     });
   } catch (error) {
     res.status(500).json({
@@ -230,7 +230,6 @@ exports.deleteComment = async (req, res) => {
 
     //If you are the owner u can delete any cmnt on your post
     if (post.owner.toString() === req.user._id.toString()) {
-      
       if (req.body.commentId == undefined) {
         return res.status(404).json({
           success: false,
