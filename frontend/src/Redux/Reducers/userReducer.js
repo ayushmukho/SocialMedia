@@ -16,6 +16,10 @@ const PostOfFollowingRequest = createAction("PostOfFollowingRequest");
 const PostOfFollowingSuccess = createAction("PostOfFollowingSuccess");
 const PostOfFollowingFailure = createAction("PostOfFollowingFailure");
 
+const AllUserRequest = createAction("AllUserRequest");
+const AllUserSuccess = createAction("AllUserSuccess");
+const AllUserFailure = createAction("AllUserFailure");
+
 const ClearErrors = createAction("ClearErrors");
 
 const initialState = {
@@ -85,6 +89,26 @@ export const postOfFollowingReducer = createReducer(initialState, (builder) => {
       state.posts = action.payload;
     })
     .addCase(PostOfFollowingFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+    //Error 
+    .addCase(ClearErrors, (state) => {
+      state.error = null;
+    });
+});
+
+
+export const allUsersReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(AllUserRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(AllUserSuccess, (state, action) => {
+      state.loading = false;
+      state.users = action.payload;
+    })
+    .addCase(AllUserFailure, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     })

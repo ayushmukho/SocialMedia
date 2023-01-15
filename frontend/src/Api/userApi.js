@@ -12,4 +12,6 @@ const headerOptions = {
 export const login = (email, password) => API.post("/login", { email, password }, headerOptions);
 export const loadUser = () => API.get("/me", { withCredentials: true });
 
+export const getAllUsers = () => API.get("/users", { withCredentials: true })
+
 export const getPostOfFollowing = () => API.get("/posts", { withCredentials: true })
