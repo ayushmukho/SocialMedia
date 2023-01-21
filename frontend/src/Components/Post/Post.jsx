@@ -5,12 +5,13 @@ import {
   FavoriteBorder,
   MoreVert,
 } from "@mui/icons-material";
-import { Avatar, Button, Typography } from "@mui/material";
+import { Avatar, Button, Dialog, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { likePost } from "../../Redux/Actions/postAction";
 import { getPostOfFollowing } from "../../Redux/Actions/userActions";
+import User from "../User/User";
 
 import "./Post.css";
 
@@ -32,7 +33,7 @@ const Post = ({
   const [likesUser, setLikesUser] = useState(false);
   const [commentValue, setCommentValue] = useState("");
   const [commentToggle, setCommentToggle] = useState(false);
-  const [captionValue, setCaptionValue] = useState(caption);
+  //const [captionValue, setCaptionValue] = useState(caption);
   const [captionToggle, setCaptionToggle] = useState(false);
 
   const { user } = useSelector((state) => state.user);
@@ -47,6 +48,16 @@ const Post = ({
     } else {
       dispatch(getPostOfFollowing());
     }
+  };
+
+  const addCommentHandler = async (e) => {
+    // e.preventDefault();
+    // await dispatch(addCommentOnPost(postId, commentValue));
+    // if (isAccount) {
+    //   dispatch(getMyPosts());
+    // } else {
+    //   dispatch(getFollowingPosts());
+    // }
   };
 
   useEffect(() => {
@@ -97,7 +108,12 @@ const Post = ({
         }}
       ></button> */}
       <div className="postFooter">
-        <Button size="small" sx={{ left: "0px", padding: 0 }}>
+        <Button
+          size="small"
+          sx={{ left: "0px", padding: 0 }}
+          onClick={() => setLikesUser(!likesUser)}
+          disabled={likes.length === 0 ? true : false}
+        >
           <Typography style={{ fontSize: "20px" }}>{likes.length}</Typography>
         </Button>
 
@@ -105,7 +121,7 @@ const Post = ({
           {liked ? <Favorite style={{ color: "red" }} /> : <FavoriteBorder />}
         </Button>
 
-        <Button size="small">
+        <Button size="small" onClick={() => setCommentToggle(!commentToggle)}>
           <ChatBubbleOutline />
         </Button>
 
@@ -115,6 +131,59 @@ const Post = ({
           </Button>
         ) : null}
       </div>
+      <Dialog open={likesUser} onClose={() => setLikesUser(!likesUser)}>
+        <div className="DialogBox">
+          <Typography variant="h4">Liked By</Typography>
+
+          {likes.map((like) => (
+            <User
+              key={like._id}
+              userId={like._id}
+              name={like.name}
+              avatar={like.avatar.url}
+            />
+          ))}
+        </div>
+      </Dialog>
+      <Dialog
+        open={commentToggle}
+        onClose={() => setCommentToggle(!commentToggle)}
+      >
+        <div className="DialogBox">
+          <Typography variant="h4">Comments</Typography>
+
+          <form className="commentForm" onSubmit={addCommentHandler}>
+            <input
+              type="text"
+              value={commentValue}
+              onChange={(e) => setCommentValue(e.target.value)}
+              placeholder="Comment Here..."
+              required
+            />
+
+            <Button type="submit" variant="contained">
+              Add
+            </Button>
+          </form>
+
+          {/* {comments.length > 0 ? (
+            comments.map((item) => (
+              <CommentCard
+                userId={item.user._id}
+                name={item.user.name}
+                avatar={item.user.avatar.url}
+                comment={item.comment}
+                commentId={item._id}
+                key={item._id}
+                postId={postId}
+                isAccount={isAccount}
+              />
+            ))
+          ) : (
+            <Typography>No comments Yet</Typography>
+          )} */}
+        </div>
+      </Dialog>
     </div>
   );
 };
