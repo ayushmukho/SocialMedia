@@ -9,4 +9,4 @@ const headerOptions = {
   },
 };
 
-export const likePost = (id) => API.get(`/post/${id}`);
+export const likePost = (id) => API.get(`/post/${id}`, { withCredentials: true });

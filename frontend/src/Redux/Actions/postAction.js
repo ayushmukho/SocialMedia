@@ -1,6 +1,6 @@
 import * as postApi from "../../Api/postApi";
 
-export const getAllUsers = (id) => async (dispatch) => {
+export const likePost = (id) => async (dispatch) => {
   try {
     dispatch({ type: "LikeRequest" });
 
@@ -11,3 +11,4 @@ export const getAllUsers = (id) => async (dispatch) => {
     dispatch({ type: "LikeFailure", payload: error.response.data.message });
   }
 }
+
