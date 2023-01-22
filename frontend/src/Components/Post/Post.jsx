@@ -9,7 +9,7 @@ import { Avatar, Button, Dialog, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { likePost } from "../../Redux/Actions/postAction";
+import { addCommentOnPost, likePost } from "../../Redux/Actions/postAction";
 import { getPostOfFollowing } from "../../Redux/Actions/userActions";
 import User from "../User/User";
 
@@ -51,8 +51,8 @@ const Post = ({
   };
 
   const addCommentHandler = async (e) => {
-    // e.preventDefault();
-    // await dispatch(addCommentOnPost(postId, commentValue));
+    e.preventDefault();
+    await dispatch(addCommentOnPost(postId, commentValue));
     // if (isAccount) {
     //   dispatch(getMyPosts());
     // } else {

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { likeReducer } from "./Redux/Reducers/postReducer";
+import { likeAndCommentReducer } from "./Redux/Reducers/postReducer";
 import {
   allUsersReducer,
   postOfFollowingReducer,
@@ -11,7 +11,7 @@ const store = configureStore({
     user: userReducer,
     postOfFollowing: postOfFollowingReducer,
     allUsers: allUsersReducer,
-    like: likeReducer
+    likeAndComment: likeAndCommentReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

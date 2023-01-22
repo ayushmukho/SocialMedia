@@ -22,7 +22,7 @@ const Home = () => {
   const { loading, posts, error } = useSelector(
     (state) => state.postOfFollowing
   );
-  const { error: likeError, message } = useSelector((state) => state.like);
+  const { error: likeError, message } = useSelector((state) => state.likeAndComment);
 
   //handlers
   useEffect(() => {
