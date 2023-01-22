@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addCommentOnPost, likePost } from "../../Redux/Actions/postAction";
 import { getPostOfFollowing } from "../../Redux/Actions/userActions";
+import CommentCard from "../CommentCard/CommentCard";
 import User from "../User/User";
 
 import "./Post.css";
@@ -53,11 +54,11 @@ const Post = ({
   const addCommentHandler = async (e) => {
     e.preventDefault();
     await dispatch(addCommentOnPost(postId, commentValue));
-    // if (isAccount) {
-    //   dispatch(getMyPosts());
-    // } else {
-    //   dispatch(getFollowingPosts());
-    // }
+    if (isAccount) {
+      console.log("Bring my Post .....");
+    } else {
+      dispatch(getPostOfFollowing());
+    }
   };
 
   useEffect(() => {
@@ -166,7 +167,7 @@ const Post = ({
             </Button>
           </form>
 
-          {/* {comments.length > 0 ? (
+          {comments.length > 0 ? (
             comments.map((item) => (
               <CommentCard
                 userId={item.user._id}
@@ -181,7 +182,7 @@ const Post = ({
             ))
           ) : (
             <Typography>No comments Yet</Typography>
-          )} */}
+          )}
         </div>
       </Dialog>
     </div>
