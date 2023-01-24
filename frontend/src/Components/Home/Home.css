@@ -16,6 +16,11 @@
   padding: 2vmax;
   box-sizing: border-box;
 }
+
+.homeleft::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
 .homeright {
   background-color: white;
   padding: 2vmax;
@@ -25,6 +30,10 @@
   border-radius: 20px 0 0 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-top: 56px;
+}
+
+.homeright::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }
 
 .homeUser {
@@ -39,11 +48,11 @@
   width: 3vmax;
   margin: 1.3vmax;
   border-radius: 100%;
-  border: 2px solid #c2edce;
+  /* border: 2px solid #c2edce; */
 }
 
 .homeUser:hover {
-  transform: translateY(-10px);
+  transform: translateY(-1.2px);
 }
 
 @media screen and (max-width: 600px) {

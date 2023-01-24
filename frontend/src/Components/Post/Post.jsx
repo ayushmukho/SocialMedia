@@ -100,14 +100,6 @@ const Post = ({
           {caption}
         </Typography>
       </div>
-      {/* <button
-        style={{
-          border: "none",
-          backgroundColor: "white",
-          cursor: "pointer",
-          margin: "1vmax 2vmax",
-        }}
-      ></button> */}
       <div className="postFooter">
         <Button
           size="small"
@@ -151,8 +143,6 @@ const Post = ({
         onClose={() => setCommentToggle(!commentToggle)}
       >
         <div className="DialogBox">
-          <Typography variant="h4">Comments</Typography>
-
           <form className="commentForm" onSubmit={addCommentHandler}>
             <input
               type="text"
