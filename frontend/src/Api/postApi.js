@@ -11,3 +11,4 @@ const headerOptions = {
 
 export const likePost = (id) => API.get(`/post/${id}`, { withCredentials: true });
 export const addCommentOnPost = (id, comment) => API.put(`/post/comment/${id}`, { comment }, headerOptions);
+export const deleteCommentOnPost = (postId, commentId) => axios.delete(`api/v1/post/comment/${postId}`, { commentId });

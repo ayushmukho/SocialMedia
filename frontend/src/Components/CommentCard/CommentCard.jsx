@@ -5,6 +5,7 @@ import { Delete } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostOfFollowing } from "../../Redux/Actions/userActions";
 import "./CommentCard.css";
+import { deleteCommentOnPost } from "../../Redux/Actions/postAction";
 
 const CommentCard = ({
   userId,
@@ -18,9 +19,8 @@ const CommentCard = ({
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const deleteCommentHandle = () => {
-    //dispatch(deleteCommentOnPost(postId, commentId));
-
+  const deleteCommentHandle = async () => {
+    await dispatch(deleteCommentOnPost(postId, commentId));
     if (isAccount) {
       // dispatch(getMyPosts());
     } else {
