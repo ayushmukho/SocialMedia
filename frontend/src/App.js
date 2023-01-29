@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./Components/Header/Header";
 import Login from "./Components/Login/Login";
 import Home from "./Components/Home/Home";
+import Account from "./Components/Account/Account";
 
 function App() {
   //handlers
@@ -23,6 +24,7 @@ function App() {
       {isAuthenticated && <Header />}
       <Routes>
         <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+        <Route path="/account" element={isAuthenticated ? <Account /> : <Login />} />
       </Routes>
     </Router>
   );

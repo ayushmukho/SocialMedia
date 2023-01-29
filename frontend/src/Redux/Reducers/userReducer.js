@@ -20,6 +20,10 @@ const AllUserRequest = createAction("AllUserRequest");
 const AllUserSuccess = createAction("AllUserSuccess");
 const AllUserFailure = createAction("AllUserFailure");
 
+const MyPostsRequest = createAction("MyPostsRequest");
+const MyPostsSuccess = createAction("MyPostsSuccess");
+const MyPostsFailure = createAction("MyPostsFailure");
+
 const ClearErrors = createAction("ClearErrors");
 
 const initialState = {
@@ -113,6 +117,24 @@ export const allUsersReducer = createReducer(initialState, (builder) => {
       state.error = action.payload;
     })
     //Error 
+    .addCase(ClearErrors, (state) => {
+      state.error = null;
+    });
+});
+
+export const myPostsReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(MyPostsRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(MyPostsSuccess, (state, action) => {
+      state.loading = false;
+      state.posts = action.payload;
+    })
+    .addCase(MyPostsFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
     .addCase(ClearErrors, (state) => {
       state.error = null;
     });

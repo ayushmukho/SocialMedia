@@ -6,11 +6,13 @@ const LikeFailure = createAction("LikeFailure");
 
 const AddCommentRequest = createAction("AddCommentRequest");
 const AddCommentSuccess = createAction("AddCommentSuccess");
-const AddCommentFailure = createAction("AddCommentFailure"); 
+const AddCommentFailure = createAction("AddCommentFailure");
 
 const DeleteCommentRequest = createAction("DeleteCommentRequest");
 const DeleteCommentSuccess = createAction("DeleteCommentSuccess");
-const DeleteCommentFailure = createAction("DeleteCommentFailure"); 
+const DeleteCommentFailure = createAction("DeleteCommentFailure");
+
+
 
 const ClearMessage = createAction("ClearMessage");
 const ClearErrors = createAction("ClearErrors");
@@ -59,3 +61,5 @@ export const likeAndCommentReducer = createReducer(initialState, (builder) => {
       state.message = null;
     });
 });
+
+
