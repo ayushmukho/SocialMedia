@@ -27,6 +27,23 @@
   margin-top: 56px;
 }
 
+.acoount_disc {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+
+  align-items: center;
+}
+
+.acoount_discGG {
+  display: flex;
+  margin-top: 20px;
+
+  justify-content: space-between;
+}
+
 .accountright img:hover {
   transform: scale(1.1);
 }
@@ -39,30 +56,30 @@
   margin: 2vmax;
 }
 
-.accountright > a {
+.acoount_discGG > a {
   color: rgb(73, 73, 73);
   text-decoration: none;
-  font: 100 1.2rem "Roboto";
+  font: 100 1rem "Roboto";
   text-align: center;
   margin-top: 2vmax;
   padding: 0.5vmax 1vmax;
   transition: all 0.5s;
 }
 
-.accountright > a:hover {
+.acoount_discGG > a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.253);
 }
-.accountright > div {
+/* .accountright > div {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 1vmax;
-}
+} */
 
-.accountright > div > button:hover {
+.acoount_disc > div > button:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.253);
 }
-.accountright > div > button {
+.acoount_disc > div > button {
   border: none;
   background-color: white;
   cursor: pointer;
