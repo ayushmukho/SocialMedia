@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addCommentOnPost, likePost } from "../../Redux/Actions/postAction";
-import { getPostOfFollowing } from "../../Redux/Actions/userActions";
+import { getMyPosts, getPostOfFollowing } from "../../Redux/Actions/userActions";
 import CommentCard from "../CommentCard/CommentCard";
 import User from "../User/User";
 
@@ -45,7 +45,7 @@ const Post = ({
     await dispatch(likePost(postId));
 
     if (isAccount) {
-      console.log("Bring my Post .....");
+      dispatch(getMyPosts());
     } else {
       dispatch(getPostOfFollowing());
     }
@@ -55,7 +55,7 @@ const Post = ({
     e.preventDefault();
     await dispatch(addCommentOnPost(postId, commentValue));
     if (isAccount) {
-      console.log("Bring my Post .....");
+      dispatch(getMyPosts());
     } else {
       dispatch(getPostOfFollowing());
     }

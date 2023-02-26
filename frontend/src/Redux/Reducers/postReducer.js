@@ -12,7 +12,9 @@ const DeleteCommentRequest = createAction("DeleteCommentRequest");
 const DeleteCommentSuccess = createAction("DeleteCommentSuccess");
 const DeleteCommentFailure = createAction("DeleteCommentFailure");
 
-
+const NewPostRequest = createAction("NewPostRequest");
+const NewPostSuccess = createAction("NewPostSuccess");
+const NewPostFailure = createAction("NewPostFailure");
 
 const ClearMessage = createAction("ClearMessage");
 const ClearErrors = createAction("ClearErrors");
@@ -21,6 +23,7 @@ const initialState = {};
 
 export const likeAndCommentReducer = createReducer(initialState, (builder) => {
   builder
+    //Like
     .addCase(LikeRequest, (state) => {
       state.loading = true;
     })
@@ -32,6 +35,8 @@ export const likeAndCommentReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.error = action.payload;
     })
+
+    //Comment add and delete
     .addCase(AddCommentRequest, (state) => {
       state.loading = true;
     })
@@ -54,6 +59,21 @@ export const likeAndCommentReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.error = action.payload;
     })
+
+    //New Post
+    .addCase(NewPostRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(NewPostSuccess, (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    })
+    .addCase(NewPostFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+
+    //Error
     .addCase(ClearErrors, (state) => {
       state.error = null;
     })

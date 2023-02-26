@@ -35,3 +35,15 @@ export const deleteCommentOnPost = (postId, commentId) => async (dispatch) => {
     dispatch({ type: "DeleteCommentFailure", payload: error.response.data.message });
   }
 }
+
+export const createNewPost = (caption, image) => async (dispatch) => {
+  try {
+    dispatch({ type: "NewPostRequest" });
+
+    const { data } = await postApi.createNewPost(caption, image)
+
+    dispatch({ type: "NewPostSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({ type: "NewPostFailure", payload: error.response.data.message });
+  }
+}
