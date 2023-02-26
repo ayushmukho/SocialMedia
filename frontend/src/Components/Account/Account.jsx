@@ -8,7 +8,7 @@ import Post from "../Post/Post";
 import User from "../User/User";
 import "./Account.css";
 import "react-toastify/dist/ReactToastify.css";
-import { getMyPosts } from "../../Redux/Actions/userActions";
+import { getMyPosts, logoutUser } from "../../Redux/Actions/userActions";
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -25,8 +25,8 @@ const Account = () => {
 
   const [followingToggle, setFollowingToggle] = useState(false);
 
-  const logoutHandler = () => {
-    //dispatch(logoutUser());
+  const logoutHandler = async () => {
+    await dispatch(logoutUser());
     toast.success("Logged out successfully", {
       position: toast.POSITION.BOTTOM_CENTER,
     });
@@ -64,7 +64,10 @@ const Account = () => {
   }, [error, message, likeError, dispatch]);
 
   return loading === true || userLoading === true ? (
-    <Loader />
+    <>
+      <Loader />
+      <ToastContainer autoClose={1000} />
+    </>
   ) : (
     <>
       <div className="account">

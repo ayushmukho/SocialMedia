@@ -47,7 +47,9 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email }).select("+password");
+    const user = await User.findOne({ email })
+      .select("+password")
+      .populate("posts followers following");
 
     if (!user) {
       return res.status(400).json({
@@ -274,7 +276,9 @@ exports.deleteProfile = async (req, res) => {
 
 exports.myProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).populate("posts");
+    const user = await User.findById(req.user._id).populate(
+      "posts followers following"
+    );
     res.status(200).json({
       success: true,
       user,
@@ -304,7 +308,9 @@ exports.getAllUsers = async (req, res) => {
 
 exports.getUserDetails = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).populate("posts");
+    const user = await User.findById(req.params.id).populate(
+      "posts followers following"
+    );
 
     if (!user) {
       return res.status(404).json({

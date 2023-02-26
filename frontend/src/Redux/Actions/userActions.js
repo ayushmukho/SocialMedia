@@ -62,3 +62,16 @@ export const getMyPosts = () => async (dispatch) => {
   }
 }
 
+
+export const logoutUser = () => async (dispatch) => {
+  try {
+    dispatch({ type: "LogoutUserRequest" });
+
+    await userApi.logout();
+
+    dispatch({ type: "LogoutUserSuccess" });
+  } catch (error) {
+    dispatch({ type: "LogoutUserFailure", payload: error.response.data.message });
+  }
+};
+

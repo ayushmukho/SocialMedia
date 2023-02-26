@@ -44,6 +44,7 @@
   justify-content: space-between;
 }
 
+
 .accountright img:hover {
   transform: scale(1.1);
 }
@@ -69,12 +70,6 @@
 .acoount_discGG > a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.253);
 }
-/* .accountright > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1vmax;
-} */
 
 .acoount_disc > div > button:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.253);

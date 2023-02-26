@@ -12,6 +12,10 @@ const LoadUserRequest = createAction("LoadUserRequest");
 const LoadUserSuccess = createAction("LoadUserSuccess");
 const LoadUserFailure = createAction("LoadUserFailure");
 
+const LogoutUserRequest = createAction("LogoutUserRequest");
+const LogoutUserSuccess = createAction("LogoutUserSuccess");
+const LogoutUserFailure = createAction("LogoutUserFailure");
+
 const PostOfFollowingRequest = createAction("PostOfFollowingRequest");
 const PostOfFollowingSuccess = createAction("PostOfFollowingSuccess");
 const PostOfFollowingFailure = createAction("PostOfFollowingFailure");
@@ -77,7 +81,22 @@ export const userReducer = createReducer(initialState, (builder) => {
       state.isAuthenticated = false;
     })
 
-    //Error 
+    //Logout User
+    .addCase(LogoutUserRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(LogoutUserSuccess, (state) => {
+      state.loading = false;
+      state.user = null;
+      state.isAuthenticated = false;
+    })
+    .addCase(LogoutUserFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+      state.isAuthenticated = true;
+    })
+
+    //Error
     .addCase(ClearErrors, (state) => {
       state.error = null;
     });
@@ -96,12 +115,11 @@ export const postOfFollowingReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.error = action.payload;
     })
-    //Error 
+    //Error
     .addCase(ClearErrors, (state) => {
       state.error = null;
     });
 });
-
 
 export const allUsersReducer = createReducer(initialState, (builder) => {
   builder
@@ -116,7 +134,7 @@ export const allUsersReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.error = action.payload;
     })
-    //Error 
+    //Error
     .addCase(ClearErrors, (state) => {
       state.error = null;
     });
