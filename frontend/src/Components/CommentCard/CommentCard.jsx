@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Delete } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostOfFollowing } from "../../Redux/Actions/userActions";
+import { getMyPosts, getPostOfFollowing } from "../../Redux/Actions/userActions";
 import "./CommentCard.css";
 import { deleteCommentOnPost } from "../../Redux/Actions/postAction";
 
@@ -22,7 +22,7 @@ const CommentCard = ({
   const deleteCommentHandle = async () => {
     await dispatch(deleteCommentOnPost(postId, commentId));
     if (isAccount) {
-      // dispatch(getMyPosts());
+      dispatch(getMyPosts());
     } else {
       dispatch(getPostOfFollowing());
     }

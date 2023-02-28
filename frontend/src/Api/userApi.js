@@ -14,7 +14,7 @@ export const register = (name, email, password, avatar) => API.post("/register",
 export const loadUser = () => API.get("/me", { withCredentials: true });
 export const logout = () => API.get("/logout", { withCredentials: true });
 
-export const getAllUsers = () => API.get("/users", { withCredentials: true });
+export const getAllUsers = (name) => API.get(`/users?name=${name}`, { withCredentials: true });
 
 export const getPostOfFollowing = () =>
   API.get("/posts", { withCredentials: true });

@@ -49,11 +49,11 @@ export const getPostOfFollowing = () => async (dispatch) => {
   }
 }
 
-export const getAllUsers = () => async (dispatch) => {
+export const getAllUsers = (name = "") => async (dispatch) => {
   try {
     dispatch({ type: "AllUserRequest" });
 
-    const { data } = await userApi.getAllUsers();
+    const { data } = await userApi.getAllUsers(name);
 
     dispatch({ type: "AllUserSuccess", payload: data.users });
   } catch (error) {

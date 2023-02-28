@@ -11,7 +11,7 @@ const headerOptions = {
 
 export const likePost = (id) => API.get(`/post/${id}`, { withCredentials: true });
 export const addCommentOnPost = (id, comment) => API.put(`/post/comment/${id}`, { comment }, headerOptions);
-export const deleteCommentOnPost = (postId, commentId) => axios.delete(`api/v1/post/comment/${postId}`, { commentId });
+export const deleteCommentOnPost = (postId, commentId) => axios.delete(`api/v1/post/comment/${postId}`, { commentId }, { withCredentials: true });
 export const createNewPost = (caption, image) => API.post('/post/upload', { caption, image }, headerOptions);
 export const updatePostCaption = (caption, id) => API.put(`post/${id}`, {caption}, headerOptions);
 export const deletePost = (id) => API.delete(`post/${id}`, { withCredentials: true });
