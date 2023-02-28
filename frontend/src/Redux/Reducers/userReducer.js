@@ -28,6 +28,14 @@ const MyPostsRequest = createAction("MyPostsRequest");
 const MyPostsSuccess = createAction("MyPostsSuccess");
 const MyPostsFailure = createAction("MyPostsFailure");
 
+const UserPostsRequest = createAction("UserPostsRequest");
+const UserPostsSuccess = createAction("UserPostsSuccess");
+const UserPostsFailure = createAction("UserPostsFailure");
+
+const UserProfileRequest = createAction("UserProfileRequest");
+const UserProfileSuccess = createAction("UserProfileSuccess");
+const UserProfileFailure = createAction("UserProfileFailure");
+
 const ClearErrors = createAction("ClearErrors");
 
 const initialState = {
@@ -140,6 +148,25 @@ export const allUsersReducer = createReducer(initialState, (builder) => {
     });
 });
 
+export const userProfileReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(UserProfileRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(UserProfileSuccess, (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+    })
+    .addCase(UserProfileFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+    //Error
+    .addCase(ClearErrors, (state) => {
+      state.error = null;
+    });
+});
+
 export const myPostsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(MyPostsRequest, (state) => {
@@ -157,3 +184,24 @@ export const myPostsReducer = createReducer(initialState, (builder) => {
       state.error = null;
     });
 });
+
+export const userPostsReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(UserPostsRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(UserPostsSuccess, (state, action) => {
+      state.loading = false;
+      state.posts = action.payload;
+    })
+    .addCase(UserPostsFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+    .addCase(ClearErrors, (state) => {
+      state.error = null;
+    });
+});
+
+
+

@@ -146,3 +146,43 @@ export const resetPassword = (token, password) => async (dispatch) => {
     dispatch({ type: "ResetPasswordFailure", payload: error.response.data.message });
   }
 };
+
+
+export const getUserPosts = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "UserPostsRequest" });
+
+    const { data } = await userApi.getUserPosts(id);
+
+    dispatch({ type: "UserPostsSuccess", payload: data.posts });
+
+  } catch (error) {
+    dispatch({ type: "UserPostsFailure", payload: error.response.data.message });
+  }
+}
+
+export const getUserProfile = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "UserProfileRequest" });
+
+    const { data } = await userApi.getUserProfile(id);
+
+    dispatch({ type: "UserProfileSuccess", payload: data.user });
+
+  } catch (error) {
+    dispatch({ type: "UserProfileFailure", payload: error.response.data.message });
+  }
+}
+
+export const followAndUnfollowUser = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "FollowUserRequest" });
+
+    const { data } = await userApi.followAndUnfollowUser(id);
+
+    dispatch({ type: "FollowUserSuccess", payload: data.user });
+
+  } catch (error) {
+    dispatch({ type: "FollowUserFailure", payload: error.response.data.message });
+  }
+}

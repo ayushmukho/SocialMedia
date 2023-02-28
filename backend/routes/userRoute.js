@@ -13,6 +13,7 @@ const {
   forgotPassword,
   resetPassword,
   getMyPosts,
+  getUserPosts,
 } = require("../controllers/userController");
 const { isAuthenticated } = require("../middlewares/auth");
 
@@ -29,6 +30,7 @@ router.route("/update/profile").put(isAuthenticated, updateProfile);
 
 router.route("/me").get(isAuthenticated, myProfile);
 router.route("/my/posts").get(isAuthenticated, getMyPosts)
+router.route("/userposts/:id").get(isAuthenticated, getUserPosts)
 router.route("/delete/me").delete(isAuthenticated, deleteProfile);
  
 router.route("/user/:id").get(isAuthenticated, getUserDetails);

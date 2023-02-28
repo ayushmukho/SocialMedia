@@ -5,6 +5,8 @@ import {
   postOfFollowingReducer,
   userReducer,
   myPostsReducer,
+  userProfileReducer,
+  userPostsReducer,
 } from "./Redux/Reducers/userReducer";
 
 const store = configureStore({
@@ -14,6 +16,8 @@ const store = configureStore({
     allUsers: allUsersReducer,
     likeAndComment: likeAndCommentReducer,
     myPosts: myPostsReducer,
+    userProfile: userProfileReducer,
+    userPosts: userPostsReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
