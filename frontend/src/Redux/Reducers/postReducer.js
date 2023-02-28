@@ -24,6 +24,10 @@ const DeletePostRequest = createAction("DeletePostRequest");
 const DeletePostSuccess = createAction("DeletePostSuccess");
 const DeletePostFailure = createAction("DeletePostFailure");
 
+const UpdateProfileRequest = createAction("UpdateProfileRequest");
+const UpdateProfileSuccess = createAction("UpdateProfileSuccess");
+const UpdateProfileFailure = createAction("UpdateProfileFailure");
+
 const ClearMessage = createAction("ClearMessage");
 const ClearErrors = createAction("ClearErrors");
 
@@ -107,6 +111,18 @@ export const likeAndCommentReducer = createReducer(initialState, (builder) => {
       state.error = action.payload;
     })
 
+    //Update Profile
+    .addCase(UpdateProfileRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(UpdateProfileSuccess, (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    })
+    .addCase(UpdateProfileFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
     //Error
     .addCase(ClearErrors, (state) => {
       state.error = null;

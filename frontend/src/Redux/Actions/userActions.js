@@ -87,3 +87,15 @@ export const logoutUser = () => async (dispatch) => {
   }
 };
 
+export const updateProfile = (name, email, avatar) => async (dispatch) => {
+  try {
+    dispatch({ type: "UpdateProfileRequest" });
+
+    const { data } =await userApi.updateProfile(name, email, avatar);
+
+    dispatch({ type: "UpdateProfileSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({ type: "UpdateProfileFailure", payload: error.response.data.message });
+  }
+};
+

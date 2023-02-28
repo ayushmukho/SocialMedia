@@ -10,6 +10,7 @@ import Home from "./Components/Home/Home";
 import Account from "./Components/Account/Account";
 import NewPost from "./Components/NewPost/NewPost";
 import Register from "./Components/Register/Register";
+import UpdateProfile from "./Components/UpdateProfile/UpdateProfile";
 
 function App() {
   //handlers
@@ -29,6 +30,7 @@ function App() {
         <Route path="/account" element={isAuthenticated ? <Account /> : <Login />} />
         <Route path="/newpost" element={isAuthenticated ? <NewPost /> : <Login />} />
         <Route path="/register" element={isAuthenticated ? <Account /> : <Register />} />
+        <Route path="/update/profile" element={isAuthenticated ? <UpdateProfile /> : <Login />} />
       </Routes>
     </Router>
   );
