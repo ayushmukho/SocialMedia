@@ -254,14 +254,14 @@ exports.deleteProfile = async (req, res) => {
     res.cookie("token", null, options);
 
     //Delete all post of user
-    for (let i = 0; i < posts.length(); i++) {
+    for (let i = 0; i < posts.length; i++) {
       const post = await Post.findById(posts[i]);
       await cloudinary.v2.uploader.destroy(post.image.public_id);
       await post.remove();
     }
 
     //Removing user from followers following
-    for (let i = 0; i < followers.length(); i++) {
+    for (let i = 0; i < followers.length; i++) {
       const follower = await User.findById(followers[i]);
 
       const index = follower.following.indexOf(userId);
@@ -271,7 +271,7 @@ exports.deleteProfile = async (req, res) => {
     }
 
     //Removing user from following's follower
-    for (let i = 0; i < following.length(); i++) {
+    for (let i = 0; i < following.length; i++) {
       const follows = await User.findById(following[i]);
 
       const index = follows.followers.indexOf(userId);

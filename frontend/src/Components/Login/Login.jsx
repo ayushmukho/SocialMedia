@@ -12,6 +12,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const { error } = useSelector((state) => state.user);
+  const { message } = useSelector((state) => state.likeAndComment);
 
   //handlers
   const loginHandler = (e) => {
@@ -27,7 +28,14 @@ const Login = () => {
       });
       dispatch({ type: "clearErrors" });
     }
-  }, [error, dispatch]);
+
+    if (message) {
+      toast.error(message, {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+      dispatch({ type: "clearMessage" });
+    }
+  }, [error, dispatch, message]);
 
   return (
     <>
