@@ -99,3 +99,16 @@ export const updateProfile = (name, email, avatar) => async (dispatch) => {
   }
 };
 
+export const updatePassword = (oldPassword, newPassword) => async (dispatch) => {
+  try {
+    dispatch({ type: "UpdatePasswordRequest" });
+
+    const { data } =await userApi.updatePassword(oldPassword, newPassword);
+
+    dispatch({ type: "UpdatePasswordSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({ type: "UpdatePasswordFailure", payload: error.response.data.message });
+  }
+};
+
+

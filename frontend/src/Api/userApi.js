@@ -21,3 +21,4 @@ export const getPostOfFollowing = () =>
 
 export const getMyPosts = () => API.get("/my/posts", { withCredentials: true });
 export const updateProfile = (name, email, avatar) => API.put("/update/profile", { name, email, avatar }, headerOptions);
+export const updatePassword = (oldPassword, newPassword) => API.put("/update/password", { oldPassword, newPassword }, headerOptions);

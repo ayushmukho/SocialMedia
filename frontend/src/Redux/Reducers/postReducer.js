@@ -28,6 +28,10 @@ const UpdateProfileRequest = createAction("UpdateProfileRequest");
 const UpdateProfileSuccess = createAction("UpdateProfileSuccess");
 const UpdateProfileFailure = createAction("UpdateProfileFailure");
 
+const UpdatePasswordRequest = createAction("UpdatePasswordRequest");
+const UpdatePasswordSuccess = createAction("UpdatePasswordSuccess");
+const UpdatePasswordFailure = createAction("UpdatePasswordFailure");
+
 const ClearMessage = createAction("ClearMessage");
 const ClearErrors = createAction("ClearErrors");
 
@@ -120,6 +124,19 @@ export const likeAndCommentReducer = createReducer(initialState, (builder) => {
       state.message = action.payload;
     })
     .addCase(UpdateProfileFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+
+    //Update Password
+    .addCase(UpdatePasswordRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(UpdatePasswordSuccess, (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    })
+    .addCase(UpdatePasswordFailure, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     })
