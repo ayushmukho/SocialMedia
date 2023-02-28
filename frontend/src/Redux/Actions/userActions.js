@@ -103,7 +103,7 @@ export const updatePassword = (oldPassword, newPassword) => async (dispatch) => 
   try {
     dispatch({ type: "UpdatePasswordRequest" });
 
-    const { data } =await userApi.updatePassword(oldPassword, newPassword);
+    const { data } = await userApi.updatePassword(oldPassword, newPassword);
 
     dispatch({ type: "UpdatePasswordSuccess", payload: data.message });
   } catch (error) {
@@ -111,4 +111,15 @@ export const updatePassword = (oldPassword, newPassword) => async (dispatch) => 
   }
 };
 
+export const deleteUser = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "DeleteUserRequest" });
+
+    const { data } = await userApi.deleteUser();
+
+    dispatch({ type: "DeleteUserSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({ type: "DeleteUserFailure", payload: error.response.data.message });
+  }
+};
 

@@ -32,6 +32,10 @@ const UpdatePasswordRequest = createAction("UpdatePasswordRequest");
 const UpdatePasswordSuccess = createAction("UpdatePasswordSuccess");
 const UpdatePasswordFailure = createAction("UpdatePasswordFailure");
 
+const DeleteUserRequest = createAction("DeleteUserRequest");
+const DeleteUserSuccess = createAction("DeleteUserSuccess");
+const DeleteUserFailure = createAction("DeleteUserFailure");
+
 const ClearMessage = createAction("ClearMessage");
 const ClearErrors = createAction("ClearErrors");
 
@@ -137,6 +141,19 @@ export const likeAndCommentReducer = createReducer(initialState, (builder) => {
       state.message = action.payload;
     })
     .addCase(UpdatePasswordFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+
+    //Delete User
+    .addCase(DeleteUserRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(DeleteUserSuccess, (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    })
+    .addCase(DeleteUserFailure, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     })

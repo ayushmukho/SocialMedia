@@ -8,7 +8,7 @@ import Post from "../Post/Post";
 import User from "../User/User";
 import "./Account.css";
 import "react-toastify/dist/ReactToastify.css";
-import { getMyPosts, logoutUser } from "../../Redux/Actions/userActions";
+import { deleteUser, getMyPosts, logoutUser } from "../../Redux/Actions/userActions";
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -33,8 +33,8 @@ const Account = () => {
   };
 
   const deleteProfileHandler = async () => {
-    // await dispatch(deleteMyProfile())
-    // dispatch(logoutUser());
+    await dispatch(deleteUser())
+    dispatch(logoutUser());
   };
 
   useEffect(() => {
