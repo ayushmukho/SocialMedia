@@ -36,6 +36,15 @@ const DeleteUserRequest = createAction("DeleteUserRequest");
 const DeleteUserSuccess = createAction("DeleteUserSuccess");
 const DeleteUserFailure = createAction("DeleteUserFailure");
 
+const ForgotPasswordRequest = createAction("ForgotPasswordRequest");
+const ForgotPasswordSuccess = createAction("ForgotPasswordSuccess");
+const ForgotPasswordFailure = createAction("ForgotPasswordFailure");
+
+
+const ResetPasswordRequest = createAction("ResetPasswordRequest");
+const ResetPasswordSuccess = createAction("ResetPasswordSuccess");
+const ResetPasswordFailure = createAction("ResetPasswordFailure");
+
 const ClearMessage = createAction("ClearMessage");
 const ClearErrors = createAction("ClearErrors");
 
@@ -157,6 +166,32 @@ export const likeAndCommentReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.error = action.payload;
     })
+
+    //ForgotPassword
+    .addCase(ForgotPasswordRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(ForgotPasswordSuccess, (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    })
+    .addCase(ForgotPasswordFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+    //Reset Password
+    .addCase(ResetPasswordRequest, (state) => {
+      state.loading = true;
+    })
+    .addCase(ResetPasswordSuccess, (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    })
+    .addCase(ResetPasswordFailure, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+
     //Error
     .addCase(ClearErrors, (state) => {
       state.error = null;

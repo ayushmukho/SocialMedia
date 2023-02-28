@@ -23,3 +23,5 @@ export const getMyPosts = () => API.get("/my/posts", { withCredentials: true });
 export const updateProfile = (name, email, avatar) => API.put("/update/profile", { name, email, avatar }, headerOptions);
 export const updatePassword = (oldPassword, newPassword) => API.put("/update/password", { oldPassword, newPassword }, headerOptions);
 export const deleteUser = () => API.delete("/delete/me", { withCredentials: true });
+export const forgotPassword = (email) => API.post("/forgot/password", { email }, headerOptions);
+export const resetPassword = (token, password) => API.put(`/password/reset/${token}`, { password }, headerOptions);

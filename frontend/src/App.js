@@ -12,6 +12,8 @@ import NewPost from "./Components/NewPost/NewPost";
 import Register from "./Components/Register/Register";
 import UpdateProfile from "./Components/UpdateProfile/UpdateProfile";
 import UpdatePassword from "./Components/UpdatePassword/UpdatePassword";
+import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
+import ResetPassword from "./Components/ResetPassword/ResetPassword";
 
 function App() {
   //handlers
@@ -33,6 +35,8 @@ function App() {
         <Route path="/register" element={isAuthenticated ? <Account /> : <Register />} />
         <Route path="/update/profile" element={isAuthenticated ? <UpdateProfile /> : <Login />} />
         <Route path="/update/password" element={isAuthenticated ? <UpdatePassword /> : <Login />} />
+        <Route path="/forgot/password" element={isAuthenticated ? <UpdatePassword /> : <ForgotPassword />} />
+        <Route path="/password/reset/:token" element={isAuthenticated ? <UpdatePassword /> : <ResetPassword />} />
       </Routes>
     </Router>
   );

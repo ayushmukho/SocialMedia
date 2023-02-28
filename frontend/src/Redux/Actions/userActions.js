@@ -123,3 +123,26 @@ export const deleteUser = (id) => async (dispatch) => {
   }
 };
 
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch({ type: "ForgotPasswordRequest" });
+
+    const { data } = await userApi.forgotPassword(email);
+
+    dispatch({ type: "ForgotPasswordSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({ type: "ForgotPasswordFailure", payload: error.response.data.message });
+  }
+};
+
+export const resetPassword = (token, password) => async (dispatch) => {
+  try {
+    dispatch({ type: "ResetPasswordRequest" });
+
+    const { data } = await userApi.resetPassword(token, password);
+
+    dispatch({ type: "ResetPasswordSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({ type: "ResetPasswordFailure", payload: error.response.data.message });
+  }
+};
