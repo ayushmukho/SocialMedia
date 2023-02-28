@@ -10,6 +10,7 @@ const headerOptions = {
 };
 
 export const login = (email, password) => API.post("/login", { email, password }, headerOptions);
+export const register = (name, email, password, avatar) => API.post("/register", { name, email, password, avatar }, headerOptions);
 export const loadUser = () => API.get("/me", { withCredentials: true });
 export const logout = () => API.get("/logout", { withCredentials: true });
 

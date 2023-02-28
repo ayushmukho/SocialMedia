@@ -12,6 +12,18 @@ export const loginUser = (email, password) => async (dispatch) => {
   }
 };
 
+export const registerUser = (name, email, password, avatar) => async (dispatch) => {
+  try {
+    dispatch({ type: "RegisterRequest" });
+
+    const { data } = await userApi.register(name, email, password, avatar);
+
+    dispatch({ type: "RegisterSuccess", payload: data.user });
+  } catch (error) {
+    dispatch({ type: "RegisterFailure", payload: error.response.data.message });
+  }
+};
+
 export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: "LoadUserRequest" });

@@ -9,6 +9,7 @@ import Login from "./Components/Login/Login";
 import Home from "./Components/Home/Home";
 import Account from "./Components/Account/Account";
 import NewPost from "./Components/NewPost/NewPost";
+import Register from "./Components/Register/Register";
 
 function App() {
   //handlers
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
         <Route path="/account" element={isAuthenticated ? <Account /> : <Login />} />
         <Route path="/newpost" element={isAuthenticated ? <NewPost /> : <Login />} />
+        <Route path="/register" element={isAuthenticated ? <Account /> : <Register />} />
       </Routes>
     </Router>
   );
