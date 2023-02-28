@@ -56,6 +56,8 @@ exports.deletePost = async (req, res) => {
       });
     }
 
+    await cloudinary.v2.uploader.destroy(post.image.public_id);
+
     await post.remove();
 
     //Removing from User model also

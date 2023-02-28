@@ -59,3 +59,16 @@ export const updatePostCaption = (caption, id) => async (dispatch) => {
     dispatch({ type: "UpdateCaptionFailure", payload: error.response.data.message });
   }
 }
+
+export const deletePost = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "DeletePostRequest" });
+
+    const { data } = await postApi.deletePost(id);
+
+    dispatch({ type: "DeletePostSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({ type: "DeletePostFailure", payload: error.response.data.message });
+  }
+}
+

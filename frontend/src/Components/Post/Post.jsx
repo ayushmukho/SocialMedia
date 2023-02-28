@@ -11,12 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   addCommentOnPost,
+  deletePost,
   likePost,
   updatePostCaption,
 } from "../../Redux/Actions/postAction";
 import {
   getMyPosts,
   getPostOfFollowing,
+  loadUser,
 } from "../../Redux/Actions/userActions";
 import CommentCard from "../CommentCard/CommentCard";
 import User from "../User/User";
@@ -72,6 +74,12 @@ const Post = ({
     e.preventDefault();
     await dispatch(updatePostCaption(captionValue, postId));
     dispatch(getMyPosts());
+  };
+
+  const deletePostHandler = async () => {
+    await dispatch(deletePost(postId));
+    dispatch(getMyPosts());
+    dispatch(loadUser());
   };
 
   useEffect(() => {
@@ -132,7 +140,7 @@ const Post = ({
         </Button>
 
         {isDelete ? (
-          <Button size="small">
+          <Button size="small" onClick={deletePostHandler}>
             <DeleteOutline />
           </Button>
         ) : null}
