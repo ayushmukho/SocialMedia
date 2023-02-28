@@ -9,8 +9,15 @@ import { Avatar, Button, Dialog, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addCommentOnPost, likePost } from "../../Redux/Actions/postAction";
-import { getMyPosts, getPostOfFollowing } from "../../Redux/Actions/userActions";
+import {
+  addCommentOnPost,
+  likePost,
+  updatePostCaption,
+} from "../../Redux/Actions/postAction";
+import {
+  getMyPosts,
+  getPostOfFollowing,
+} from "../../Redux/Actions/userActions";
 import CommentCard from "../CommentCard/CommentCard";
 import User from "../User/User";
 
@@ -34,7 +41,7 @@ const Post = ({
   const [likesUser, setLikesUser] = useState(false);
   const [commentValue, setCommentValue] = useState("");
   const [commentToggle, setCommentToggle] = useState(false);
-  //const [captionValue, setCaptionValue] = useState(caption);
+  const [captionValue, setCaptionValue] = useState(caption);
   const [captionToggle, setCaptionToggle] = useState(false);
 
   const { user } = useSelector((state) => state.user);
@@ -59,6 +66,12 @@ const Post = ({
     } else {
       dispatch(getPostOfFollowing());
     }
+  };
+
+  const updateCaptionHandler = async (e) => {
+    e.preventDefault();
+    await dispatch(updatePostCaption(captionValue, postId));
+    dispatch(getMyPosts());
   };
 
   useEffect(() => {
@@ -173,6 +186,27 @@ const Post = ({
           ) : (
             <Typography>No comments Yet</Typography>
           )}
+        </div>
+      </Dialog>
+
+      <Dialog
+        open={captionToggle}
+        onClose={() => setCaptionToggle(!captionToggle)}
+      >
+        <div className="DialogBox">
+          <form className="commentForm" onSubmit={updateCaptionHandler}>
+            <input
+              type="text"
+              value={captionValue}
+              onChange={(e) => setCaptionValue(e.target.value)}
+              placeholder="Update Caption Here..."
+              required
+            />
+
+            <Button type="submit" variant="contained">
+              Update
+            </Button>
+          </form>
         </div>
       </Dialog>
     </div>

@@ -40,10 +40,22 @@ export const createNewPost = (caption, image) => async (dispatch) => {
   try {
     dispatch({ type: "NewPostRequest" });
 
-    const { data } = await postApi.createNewPost(caption, image)
+    const { data } = await postApi.createNewPost(caption, image);
 
     dispatch({ type: "NewPostSuccess", payload: data.message });
   } catch (error) {
     dispatch({ type: "NewPostFailure", payload: error.response.data.message });
+  }
+}
+
+export const updatePostCaption = (caption, id) => async (dispatch) => {
+  try {
+    dispatch({ type: "UpdateCaptionRequest" });
+
+    const { data } = await postApi.updatePostCaption(caption, id);
+
+    dispatch({ type: "UpdateCaptionSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({ type: "UpdateCaptionFailure", payload: error.response.data.message });
   }
 }
